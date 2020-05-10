@@ -1,3 +1,7 @@
 language: python
+before_install:
+- chmod +x ./st.sh
 install:- pip3 install flask
-script:- python3 app.py
+- pip3 install gunicorn
+script:
+- ./st.sh
