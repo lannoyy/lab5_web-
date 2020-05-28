@@ -24,6 +24,7 @@ app.config['RECAPTCHA_USE_SSL'] = False
 app.config['RECAPTCHA_PUBLIC_KEY'] ='6LcA3PUUAAAAAJ79qNs7LMk-9tGN4haFCcML61Id'
 app.config['RECAPTCHA_PRIVATE_KEY'] ='6LcA3PUUAAAAAKxTilaTBgQQ7AlLedtZ79EVUJar'
 app.config['RECAPTCHA_OPTIONS'] = {'theme':'white'}
+app.config['SECRET_KEY'] = '1738027504403005205'
 class NetForm(FlaskForm):
     openid = StringField('openid', validators = [
         DataRequired()])
