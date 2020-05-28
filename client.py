@@ -11,7 +11,10 @@ with open(path,'rb') as fh:
     
 jsondata = {'imagebin':b64.decode('utf-8')}
 res = requests.post('http://localhost:5000/apinet', json=jsondata)
+res1 = requests.get('http://localhost:5000/net')
 if res.ok:
+    print(res.json())
+if res1.ok:
     print(res.json())
 
 try:
