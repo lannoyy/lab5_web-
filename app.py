@@ -8,8 +8,6 @@ from flask_wtf import FlaskForm,RecaptchaField
 from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired
 from flask_wtf.file import FileField, FileAllowed, FileRequired
-SECRET_KEY = os.urandom(32)
-app.config['SECRET_KEY'] = SECRET_KEY
 app = Flask(__name__)
 @app.route("/")
 def hello():
@@ -22,6 +20,8 @@ def data_to():
     some_value = 10  
     return render_template('simple.html',some_str = some_str,some_value = some_value,some_pars=some_pars)
  
+SECRET_KEY = os.urandom(32)
+app.config['SECRET_KEY'] = SECRET_KEY
 app.config['RECAPTCHA_USE_SSL'] = False
 app.config['RECAPTCHA_PUBLIC_KEY'] ='6LcA3PUUAAAAAJ79qNs7LMk-9tGN4haFCcML61Id'
 app.config['RECAPTCHA_PRIVATE_KEY'] ='6LcA3PUUAAAAAKxTilaTBgQQ7AlLedtZ79EVUJar'
