@@ -2,12 +2,14 @@ from flask import render_template
 from flask import Flask
 from werkzeug.utils import secure_filename
 import os
+from flask_wtf.csrf import CSRFProtect, CSRFError
 import net as neuronet
 from flask_wtf import FlaskForm,RecaptchaField
 from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired
 from flask_wtf.file import FileField, FileAllowed, FileRequired
-
+SECRET_KEY = os.urandom(32)
+app.config['SECRET_KEY'] = SECRET_KEY
 app = Flask(__name__)
 @app.route("/")
 def hello():
@@ -24,7 +26,7 @@ app.config['RECAPTCHA_USE_SSL'] = False
 app.config['RECAPTCHA_PUBLIC_KEY'] ='6LcA3PUUAAAAAJ79qNs7LMk-9tGN4haFCcML61Id'
 app.config['RECAPTCHA_PRIVATE_KEY'] ='6LcA3PUUAAAAAKxTilaTBgQQ7AlLedtZ79EVUJar'
 app.config['RECAPTCHA_OPTIONS'] = {'theme':'white'}
-app.config['SECRET_KEY'] = '1738027504403005205'
+csrf = CSRFProtect(app)
 class NetForm(FlaskForm):
     openid = StringField('openid', validators = [
         DataRequired()])
