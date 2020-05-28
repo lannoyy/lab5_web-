@@ -21,8 +21,8 @@ def data_to():
     return render_template('simple.html',some_str = some_str,some_value = some_value,some_pars=some_pars)
  
 app.config['RECAPTCHA_USE_SSL'] = False
-app.config['6LcA3PUUAAAAAJ79qNs7LMk-9tGN4haFCcML61Id'] ='сюда поместить ключ из google'
-app.config['6LcA3PUUAAAAAKxTilaTBgQQ7AlLedtZ79EVUJar'] ='сюда поместить секретный ключ из google'
+app.config['RECAPTCHA_PUBLIC_KEY'] ='6LcA3PUUAAAAAJ79qNs7LMk-9tGN4haFCcML61Id'
+app.config['RECAPTCHA_PRIVATE_KEY'] ='6LcA3PUUAAAAAKxTilaTBgQQ7AlLedtZ79EVUJar'
 app.config['RECAPTCHA_OPTIONS'] = {'theme':'white'}
 class NetForm(FlaskForm):
     openid = StringField('openid', validators = [
