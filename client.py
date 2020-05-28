@@ -15,7 +15,8 @@ res1 = requests.get('http://localhost:5000/net')
 if res.ok:
     print(res.json())
 if res1.ok:
-    print(res.json())
+    print(res1.text)
+    print(res1.status_code)
 
 try:
     r = requests.get('http://localhost:5000/apixml')
