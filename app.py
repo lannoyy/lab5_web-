@@ -2,6 +2,7 @@ from flask import render_template
 from flask import Flask
 from werkzeug.utils import secure_filename
 import os
+from flask_bootstrap import Bootstrap
 from flask_wtf.csrf import CSRFProtect, CSRFError
 import net as neuronet
 from flask_wtf import FlaskForm,RecaptchaField
@@ -12,6 +13,7 @@ from flask_wtf.file import FileField, FileAllowed, FileRequired
 
 SECRET_KEY = os.urandom(32)
 app = Flask(__name__)
+bootstrap = Bootstrap(app)
 app.config['SECRET_KEY'] = SECRET_KEY
 
 @app.route("/")
