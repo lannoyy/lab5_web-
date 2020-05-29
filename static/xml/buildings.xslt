@@ -17,10 +17,10 @@
         <xsl:value-of select="name"/>
             </th>
         <th>
-            <xsl:value-of select="age"/>
+            <xsl:value-of select="country"/>
             </th>
         <th>
-            <xsl:value-of select="work"/>
+            <xsl:value-of select="city"/>
             </th>
         </tr>
         </xsl:for-each>
