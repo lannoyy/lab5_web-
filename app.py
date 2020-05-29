@@ -18,7 +18,7 @@ app = Flask(__name__)
 bootstrap = Bootstrap(app)
 app.config['SECRET_KEY'] = SECRET_KEY
 
-@app.route("/")
+@app.route("/",methods=['GET','POST'])
 def hello():
     return " <html><head></head> <body> Hello World! </body></html>"
     
