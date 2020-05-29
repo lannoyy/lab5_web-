@@ -98,7 +98,14 @@ def apixml():#парсим xml файл в dom
 @app.route("/buildings",methods=['GET','POST'])
 def buildings():
     dom = ET.parse("./static/xml/buildings.xml")
-    xslt = ET.parse("./static/xml/buildings.xslt")
+    type = request.args.get('type')
+    if type == 'list':
+        xslt = ET.parse("./static/xml/buildings_list.xslt")
+    elif type == 'table':
+        xslt = ET.parse("./static/xml/buildings.xslt")
+    else:
+        resp = Response(status=500)
+        return resp
     transform = ET.XSLT(xslt)
     newhtml = transform(dom)
     strfile = ET.tostring(newhtml)
