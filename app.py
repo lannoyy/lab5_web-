@@ -93,6 +93,15 @@ def apixml():#парсим xml файл в dom
     strfile = ET.tostring(newhtml)
     return strfile
 
+@app.route("/buildings",methods=['GET','POST'])
+def apixml():
+    dom = ET.parse("./static/xml/buildings.xml")
+    xslt = ET.parse("./static/xml/buildings.xslt")
+    transform = ET.XSLT(xslt)
+    newhtml = transform(dom)
+    strfile = ET.tostring(newhtml)
+    return strfile
+
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1',port=5000)
