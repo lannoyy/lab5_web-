@@ -3,7 +3,8 @@
 <people>
     <man id= "1">
     <name>John</name>
-    <age>30</age><work>Driver</work>
+    <age>30</age>
+    <work>Driver</work>
   </man>
     <man id = "2">
     <name>Lisa</name>

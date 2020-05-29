@@ -2,6 +2,8 @@ from flask import render_template
 from flask import Flask
 from werkzeug.utils import secure_filename
 import os
+from flask import send_file
+from flask import Flask,redirect
 from flask_bootstrap import Bootstrap
 from flask_wtf.csrf import CSRFProtect, CSRFError
 import net as neuronet
@@ -110,6 +112,25 @@ def buildings():
     newhtml = transform(dom)
     strfile = ET.tostring(newhtml)
     return strfile
+
+MAX_FILE_SIZE = 1024 * 1024 + 1
+
+@app.route("/picture", methods=["POST", "GET"])
+def picture():
+    args = {"method": "GET"}
+    if request.method == "POST":
+        level = 1
+        file = request.files["file"]
+        img = Image.open(file)
+        img.load()
+        factor = (259 * (level+255)) / (255 * (259-level))
+        for x in range(img.size[0]):
+            for y in range(img.size[1]):
+                color = img.getpixel((x, y))
+                new_color = tuple(int(factor * (c-128) + 128) for c in color)
+                img.putpixel((x, y), new_color)
+        return send_file(img, mimetype='image/png') 
+    return render_template("picture.html", args=args)
 
 
 if __name__ == "__main__":
