@@ -60,7 +60,9 @@ from flask import Response
 import base64
 from PIL import Image
 from io import BytesIO
-import json# метод для обработки запроса от пользователя
+import json
+
+# метод для обработки запроса от пользователя
 @app.route("/apinet",methods=['GET','POST'])
 def apinet():# проверяем что в запросе json данные
     if request.mimetype =='application/json':# получаем json данные
@@ -94,7 +96,7 @@ def apixml():#парсим xml файл в dom
     return strfile
 
 @app.route("/buildings",methods=['GET','POST'])
-def apixml():
+def buildings():
     dom = ET.parse("./static/xml/buildings.xml")
     xslt = ET.parse("./static/xml/buildings.xslt")
     transform = ET.XSLT(xslt)
