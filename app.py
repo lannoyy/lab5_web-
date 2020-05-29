@@ -115,7 +115,7 @@ def buildings():
 
 MAX_FILE_SIZE = 1024 * 1024 + 1
 
-@app.route("/picture", methods=["POST", "GET"])
+@app.route("/picture",methods=['GET','POST'])
 def picture():
     args = {"method": "GET"}
     if request.method == "POST":
@@ -129,6 +129,7 @@ def picture():
                 color = img.getpixel((x, y))
                 new_color = tuple(int(factor * (c-128) + 128) for c in color)
                 img.putpixel((x, y), new_color)
+        print("fff")
         return send_file(img, mimetype='image/png') 
     return render_template("picture.html", args=args)
 
