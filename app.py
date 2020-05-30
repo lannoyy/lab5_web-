@@ -18,7 +18,7 @@ app = Flask(__name__)
 bootstrap = Bootstrap(app)
 app.config['SECRET_KEY'] = SECRET_KEY
 
-@app.route("/",methods=['GET','POST'])
+@app.route("/")
 def hello():
     return " <html><head></head> <body> Hello World! </body></html>"
     
@@ -115,21 +115,15 @@ def buildings():
 
 MAX_FILE_SIZE = 1024 * 1024 + 1
 
+import picture
+
 @app.route("/picture",methods=['GET','POST'])
-def picture():
+def picture_api():
     args = {"method": "GET"}
     if request.method == "POST":
-        level = 1
         file = request.files["file"]
-        img = Image.open(file)
-        img.load()
-        factor = (259 * (level+255)) / (255 * (259-level))
-        for x in range(img.size[0]):
-            for y in range(img.size[1]):
-                color = img.getpixel((x, y))
-                new_color = tuple(int(factor * (c-128) + 128) for c in color)
-                img.putpixel((x, y), new_color)
-        print("fff")
+        img = picture.get_image(file)
+        img = picture.change_contrast(file, 6)
         return send_file(img, mimetype='image/png') 
     return render_template("picture.html", args=args)
 
