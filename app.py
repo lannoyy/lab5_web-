@@ -117,7 +117,7 @@ MAX_FILE_SIZE = 1024 * 1024 + 1
 
 import picture
 
-@app.route("/picture",methods=['GET','POST'])
+@app.route("/picture_api",methods=['GET','POST'])
 def picture_api():
     args = {"method": "GET"}
     if request.method == "POST":
