@@ -119,10 +119,15 @@ import picture
 def picture_api():
     pic = False
     if request.method == "POST":
+        try:
+            os.remove('static/picha_1.jpeg')
+            os.remove('static/picha.jpeg')
+        except FileNotFoundError:
+            pass
         str64 = request.form.get('Base64')
         lvl = float(request.form.get('lvl'))
         pic = picture.stringToRGB(str64)
-        pic = Image.fromarray(pic)
+        pic = Image.open('static/picha_1.jpeg')
         pic = picture.change_contrast(pic,lvl)
         pic.save('static/picha.jpeg')
     return render_template("picture.html", result=pic)
