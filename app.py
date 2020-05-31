@@ -120,7 +120,7 @@ def picture_api():
     pic = False
     if request.method == "POST":
         str64 = request.form.get('Base64')
-        lvl = int(request.form.get('lvl'))
+        lvl = float(request.form.get('lvl'))
         pic = picture.stringToRGB(str64)
         pic = Image.fromarray(pic)
         pic = picture.change_contrast(pic,lvl)
