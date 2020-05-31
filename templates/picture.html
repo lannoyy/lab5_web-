@@ -1,14 +1,28 @@
-{% extends "bootstrap/base.html" %}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Uploads</title>
+    <title>Picture contrast</title>
 </head>
 <body>
-    <form action="/" method="POST" enctype="multipart/form-data">
-        <input type="file" name="file">
-        <button type="submit">Загрузить</button>
-    </form>
+
+    {% if result %}
+        <img src="../static/picha.jpeg" alt="">
+    {% else %}
+        <form action="/picture_api" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <p>
+                <label for="a">Base64</label>
+                <input type="text" name="Base64">
+            </p>
+            <p>
+                <label for="b">Level contrast</label>
+                <input type="text" name="lvl">
+            </p>
+            <p>
+                <input type="submit">
+            </p>
+        </form>
+    {% endif %}
 </body>
 </html>

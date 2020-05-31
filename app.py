@@ -5,7 +5,7 @@ import os
 from flask import send_file
 from flask import Flask,redirect
 from flask_bootstrap import Bootstrap
-from flask_wtf.csrf import CSRFProtect, CSRFError
+from flask_wtf.csrf import CSRFProtect
 import net as neuronet
 from flask_wtf import FlaskForm,RecaptchaField
 from wtforms import StringField, SubmitField, TextAreaField
@@ -17,6 +17,7 @@ SECRET_KEY = os.urandom(32)
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
 app.config['SECRET_KEY'] = SECRET_KEY
+csrf = CSRFProtect(app)
 
 @app.route("/")
 def hello():
@@ -33,7 +34,6 @@ app.config['RECAPTCHA_USE_SSL'] = False
 app.config['RECAPTCHA_PUBLIC_KEY'] ='6LcA3PUUAAAAAJ79qNs7LMk-9tGN4haFCcML61Id'
 app.config['RECAPTCHA_PRIVATE_KEY'] ='6LcA3PUUAAAAAKxTilaTBgQQ7AlLedtZ79EVUJar'
 app.config['RECAPTCHA_OPTIONS'] = {'theme':'white'}
-csrf = CSRFProtect(app)
 class NetForm(FlaskForm):
     openid = StringField('openid', validators = [
         DataRequired()])
@@ -113,19 +113,19 @@ def buildings():
     strfile = ET.tostring(newhtml)
     return strfile
 
-MAX_FILE_SIZE = 1024 * 1024 + 1
-
 import picture
 
 @app.route("/picture_api",methods=['GET','POST'])
 def picture_api():
-    args = {"method": "GET"}
+    pic = False
     if request.method == "POST":
-        file = request.files["file"]
-        img = picture.get_image(file)
-        img = picture.change_contrast(file, 6)
-        return send_file(img, mimetype='image/png') 
-    return render_template("picture.html", args=args)
+        str64 = request.form.get('Base64')
+        lvl = int(request.form.get('lvl'))
+        pic = picture.stringToRGB(str64)
+        pic = Image.fromarray(pic)
+        pic = picture.change_contrast(pic,lvl)
+        pic.save('static/picha.jpeg')
+    return render_template("picture.html", result=pic)
 
 
 if __name__ == "__main__":
