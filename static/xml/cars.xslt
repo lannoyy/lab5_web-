@@ -8,19 +8,19 @@
     <body>
         <table border = "1">
     <tbody>
-    <xsl:for-each select="buildings/building">
+    <xsl:for-each select="cars/car">
         <tr>
             <th>
         <xsl:value-of select="@id"/>
             </th>
         <th>
-        <xsl:value-of select="name"/>
+        <xsl:value-of select="brand"/>
             </th>
         <th>
-            <xsl:value-of select="country"/>
+            <xsl:value-of select="year"/>
             </th>
         <th>
-            <xsl:value-of select="city"/>
+            <xsl:value-of select="horsepower"/>
             </th>
         </tr>
         </xsl:for-each>

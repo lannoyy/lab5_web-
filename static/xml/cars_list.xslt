@@ -3,13 +3,13 @@
 <xsl:template match="/">
 <html>
     <head>
-        <title>Buildings</title>
+        <title>Cars</title>
     </head>
     <body>
     <ul>
-        <xsl:for-each select="buildings/building">
+        <xsl:for-each select="cars/car">
         <li> 
-            <xsl:value-of select="@id"/> &#160; <xsl:value-of select="name"/> &#160; <xsl:value-of select="country"/> &#160; <xsl:value-of select="city"/>
+            <xsl:value-of select="@id"/> &#160; <xsl:value-of select="brand"/> &#160; <xsl:value-of select="year"/> &#160; <xsl:value-of select="horsepower"/>
         </li>
     </xsl:for-each>
     </ul>

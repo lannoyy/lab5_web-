@@ -97,14 +97,14 @@ def apixml():#парсим xml файл в dom
     strfile = ET.tostring(newhtml)
     return strfile
 
-@app.route("/buildings",methods=['GET','POST'])
-def buildings():
-    dom = ET.parse("./static/xml/buildings.xml")
+@app.route("/cars",methods=['GET','POST'])
+def cars():
+    dom = ET.parse("./static/xml/cars.xml")
     type = request.args.get('type')
     if type == 'list':
-        xslt = ET.parse("./static/xml/buildings_list.xslt")
+        xslt = ET.parse("./static/xml/cars_list.xslt")
     elif type == 'table':
-        xslt = ET.parse("./static/xml/buildings.xslt")
+        xslt = ET.parse("./static/xml/cars.xslt")
     else:
         resp = Response(status=500)
         return resp
@@ -120,16 +120,15 @@ def picture_api():
     pic = False
     if request.method == "POST":
         try:
-            os.remove('static/picha_1.jpeg')
-            os.remove('static/picha.jpeg')
+            os.remove('static/picha_1.png')
+            os.remove('static/picha.png')
         except FileNotFoundError:
             pass
         str64 = request.form.get('Base64')
-        lvl = float(request.form.get('lvl'))
-        pic = picture.stringToRGB(str64)
-        pic = Image.open('static/picha_1.jpeg')
-        pic = picture.change_contrast(pic,lvl)
-        pic.save('static/picha.jpeg')
+        picture.stringToRGB(str64)
+        pic = Image.open('static/picha_1.png')
+        pic = picture.make_grey(pic)
+        pic.save('static/picha.png')
     return render_template("picture.html", result=pic)
 
 

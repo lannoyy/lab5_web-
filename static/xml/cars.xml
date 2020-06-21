@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="buildings.xslt" ?>
+<cars>
+    <car id= "1">
+    <brand>BNW</brand>
+    <year>2010</year>
+    <horsepower>230</horsepower>
+  </car>
+    <car id= "2">
+    <brand>TOYOTA</brand>
+    <year>2007</year>
+    <horsepower>120</horsepower>
+  </car>
+    <car id= "3">
+    <brand>Wagen</brand>
+    <year>2017</year>
+    <horsepower>330</horsepower>
+  </car>
+    <car id= "4">
+    <brand>UAZ</brand>
+    <year>1995</year>
+    <horsepower>90</horsepower>
+  </car>
+    <car id= "5">
+    <brand>Lexus</brand>
+    <year>2020</year>
+    <horsepower>540</horsepower>
+  </car>
+</cars>
