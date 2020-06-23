@@ -127,7 +127,7 @@ def picture_api():
         str64 = request.form.get('Base64')
         picture.stringToRGB(str64)
         pic = Image.open('static/picha_1.png')
-        pic = picture.make_grey(pic)
+        pic = picture.watermark(pic)
         pic.save('static/picha.png')
     return render_template("picture.html", result=pic)
 
